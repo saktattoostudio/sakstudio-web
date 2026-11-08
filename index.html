@@ -13,23 +13,50 @@
 body{margin:0}
   a{color:#1e3a2b}
   a:hover{color:#a83a2a}
+
+  /* ---- NAV: Book a Session pinned right on mobile, links drop to own row ---- */
+  @media(max-width:720px){
+    .nav-bar{padding:12px 18px !important; gap:10px !important;}
+    .nav-logo{order:1;}
+    .nav-book{order:2; margin-left:auto !important; padding:10px 20px !important;}
+    .nav-links{order:3; width:100%; justify-content:center !important; gap:20px !important; margin:2px 0 0 !important;}
+  }
+
+  /* ---- ARTIST row: 3-col grid on desktop, smooth swipe on mobile ---- */
+  .artist-row{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+  @media(max-width:720px){
+    .artist-row{display:flex; gap:14px; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; padding:4px 18px 12px; scroll-padding-left:18px; scrollbar-width:none;}
+    .artist-row::-webkit-scrollbar{display:none;}
+    .artist-card{box-sizing:border-box; min-width:290px; max-width:290px; scroll-snap-align:center; flex-shrink:0;}
+  }
+
+  /* ---- FAQ accordion ---- */
+  .faq-list{max-width:720px; margin:0 auto; display:flex; flex-direction:column; gap:14px;}
+  .faq-item{background:#fffdf7; border-radius:16px; box-shadow:0 10px 26px -16px rgba(30,58,43,0.25); overflow:hidden;}
+  .faq-q{width:100%; text-align:left; background:none; border:none; cursor:pointer; padding:21px 24px; display:flex; align-items:center; justify-content:space-between; gap:14px;}
+  .faq-qt{font-family:'Fraunces',serif; font-weight:500; font-size:1.02rem; color:#1e3a2b; line-height:1.3;}
+  .faq-chev{flex-shrink:0; transition:transform .25s ease;}
+  .faq-item.open .faq-chev{transform:rotate(180deg);}
+  .faq-a{max-height:0; overflow:hidden; transition:max-height .32s ease;}
+  .faq-a-inner{padding:0 24px 21px; font-size:0.84rem; color:#4a5a47; line-height:1.75;}
+  .faq-item.open .faq-a{max-height:520px;}
 </style>
 </head>
 <body>
 <div style="background:#f5f1e6; color:#1b1b17; font-family:'Space Grotesk',sans-serif; font-weight:400; width:100%; overflow-x:clip;">
 
-  <div style="position:sticky; top:0; z-index:100; display:flex; justify-content:space-between; align-items:center; padding:16px 48px; flex-wrap:wrap; gap:16px; background:rgba(245,241,230,0.92); backdrop-filter:blur(10px); border-bottom:1px solid rgba(30,58,43,0.12); box-shadow:0 2px 16px -10px rgba(30,58,43,0.3);">
-    <a href="#top" style="display:flex; align-items:center; gap:10px; text-decoration:none;">
+  <div class="nav-bar" style="position:sticky; top:0; z-index:100; display:flex; justify-content:space-between; align-items:center; padding:16px 48px; flex-wrap:wrap; gap:16px; background:rgba(245,241,230,0.92); backdrop-filter:blur(10px); border-bottom:1px solid rgba(30,58,43,0.12); box-shadow:0 2px 16px -10px rgba(30,58,43,0.3);">
+    <a href="#top" class="nav-logo" style="display:flex; align-items:center; gap:10px; text-decoration:none;">
       <img src="images/1f4a61759e5fd0c1c8eaf55b2393ad8b.png" alt="Sak Studio" style="width:40px; height:auto; display:block;">
       <span style="font-family:'Fraunces',serif; font-weight:500; font-size:0.82rem; letter-spacing:0.18em; text-transform:uppercase; color:#1e3a2b;">Sak Studio</span>
     </a>
-    <ul style="display:flex; align-items:center; gap:28px; list-style:none; margin:0; padding:0;">
+    <ul class="nav-links" style="display:flex; align-items:center; gap:28px; list-style:none; margin:0; padding:0;">
       <li><a href="#top" style="font-size:0.76rem; letter-spacing:0.03em; color:#3f4f3b; text-decoration:none;">Home</a></li>
       <li><a href="#why-us" style="font-size:0.76rem; letter-spacing:0.03em; color:#3f4f3b; text-decoration:none;">Why Us</a></li>
       <li><a href="#artists" style="font-size:0.76rem; letter-spacing:0.03em; color:#3f4f3b; text-decoration:none;">Artists &amp; Work</a></li>
       <li><a href="#faq" style="font-size:0.76rem; letter-spacing:0.03em; color:#3f4f3b; text-decoration:none;">FAQ</a></li>
     </ul>
-    <a href="https://book.sakstudio.art" target="_blank" rel="noopener" style="background:#a83a2a; color:#fffdf7; padding:11px 26px; border-radius:40px; font-size:0.74rem; font-weight:600; letter-spacing:0.03em; text-decoration:none;">Book a Session</a>
+    <a href="https://book.sakstudio.art" target="_blank" rel="noopener" class="nav-book" style="background:#a83a2a; color:#fffdf7; padding:11px 26px; border-radius:40px; font-size:0.74rem; font-weight:600; letter-spacing:0.03em; text-decoration:none;">Book a Session</a>
   </div>
 
   <div id="top" style="position:relative; padding:56px 24px 0; text-align:center;">
@@ -38,7 +65,7 @@ body{margin:0}
     <p style="font-size:0.92rem; color:#4a5a47; max-width:430px; margin:0 auto 48px; line-height:1.7;">Three artists, four slots a day, three minutes from BTS Saphan Taksin. No chains, no rush — just work worth keeping.</p>
 
     <div style="position:relative; max-width:1060px; margin:0 auto; padding:0 20px 100px;">
-      <div style="display:flex; align-items:center; justify-content:center; gap:16px; padding:0 0 30px; flex-wrap:nowrap;">
+      <div id="hero-row" style="display:flex; align-items:center; justify-content:center; gap:16px; padding:0 0 30px; flex-wrap:nowrap; touch-action:pan-y;">
         <div class="hero-card" data-i="0" style="">
           <div style="width:100%; height:100%; border-radius:14px; overflow:hidden; position:relative;">
             <img class="hero-img" src="images/fb34252d165e4a925d6f76ce74dd2a9f.jpg" alt="A circular mountain-and-moon scene tied together with fine trail markers and a compass." style="display:block; width:100%; height:100%; object-fit:cover; filter:none; transition:filter .4s ease;">
@@ -360,8 +387,8 @@ body{margin:0}
 
     <!-- LANDING: all three -->
     <div id="artist-grid">
-      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:22px;">
-      <div data-open="song" style="background:#fffdf7; border-radius:18px; padding:22px; box-shadow:0 10px 26px -16px rgba(30,58,43,0.25); cursor:pointer; transition:transform .2s ease, box-shadow .2s ease;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 20px 38px -18px rgba(30,58,43,0.4)';" onmouseout="this.style.transform='';this.style.boxShadow='0 10px 26px -16px rgba(30,58,43,0.25)';">
+      <div class="artist-row">
+      <div data-open="song" class="artist-card" style="background:#fffdf7; border-radius:18px; padding:22px; box-shadow:0 10px 26px -16px rgba(30,58,43,0.25); cursor:pointer; transition:transform .2s ease, box-shadow .2s ease;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 20px 38px -18px rgba(30,58,43,0.4)';" onmouseout="this.style.transform='';this.style.boxShadow='0 10px 26px -16px rgba(30,58,43,0.25)';">
         <div style="display:flex; gap:14px; align-items:flex-start; margin-bottom:14px;">
           <img src="images/72804f695ed6eafac1295427fcfdd1bc.jpg" alt="Song" style="width:72px; height:72px; object-fit:cover; border-radius:50%; flex-shrink:0; box-shadow:0 8px 18px -8px rgba(30,58,43,0.3);">
           <div style="min-width:0;">
@@ -373,7 +400,7 @@ body{margin:0}
         <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:5px; margin-bottom:12px;"><img src="images/fb34252d165e4a925d6f76ce74dd2a9f.jpg" alt="Mountain and compass" style="width:100%; aspect-ratio:1; object-fit:cover; border-radius:7px; display:block;"><img src="images/698b9ac7096ea1096a4f941be918f337.jpg" alt="Marble bust collage" style="width:100%; aspect-ratio:1; object-fit:cover; border-radius:7px; display:block;"><img src="images/3f4cf3a9abc9f19445c8e9c8a5e8af48.jpg" alt="Raven and star chart" style="width:100%; aspect-ratio:1; object-fit:cover; border-radius:7px; display:block;"><img src="images/38d02fdb72f28bbd9340b53fc95b75cb.jpg" alt="Stone bust" style="width:100%; aspect-ratio:1; object-fit:cover; border-radius:7px; display:block;"></div>
         <span style="font-size:0.72rem; font-weight:600; color:#a83a2a; letter-spacing:0.02em;">View all work &amp; details &rarr;</span>
       </div>
-      <div data-open="m" style="background:#fffdf7; border-radius:18px; padding:22px; box-shadow:0 10px 26px -16px rgba(30,58,43,0.25); cursor:pointer; transition:transform .2s ease, box-shadow .2s ease;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 20px 38px -18px rgba(30,58,43,0.4)';" onmouseout="this.style.transform='';this.style.boxShadow='0 10px 26px -16px rgba(30,58,43,0.25)';">
+      <div data-open="m" class="artist-card" style="background:#fffdf7; border-radius:18px; padding:22px; box-shadow:0 10px 26px -16px rgba(30,58,43,0.25); cursor:pointer; transition:transform .2s ease, box-shadow .2s ease;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 20px 38px -18px rgba(30,58,43,0.4)';" onmouseout="this.style.transform='';this.style.boxShadow='0 10px 26px -16px rgba(30,58,43,0.25)';">
         <div style="display:flex; gap:14px; align-items:flex-start; margin-bottom:14px;">
           <img src="images/6df3527c8f3580f802a0afeac263c192.jpg" alt="M" style="width:72px; height:72px; object-fit:cover; border-radius:50%; flex-shrink:0; box-shadow:0 8px 18px -8px rgba(30,58,43,0.3);">
           <div style="min-width:0;">
@@ -385,7 +412,7 @@ body{margin:0}
         <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:5px; margin-bottom:12px;"><img src="images/000fb90c5fbf5316d047658837022fb8.jpg" alt="Wolf and compass" style="width:100%; aspect-ratio:1; object-fit:cover; border-radius:7px; display:block;"><img src="images/feff4ca5f9a2317472529b45d6286178.jpg" alt="Tiger sleeve" style="width:100%; aspect-ratio:1; object-fit:cover; border-radius:7px; display:block;"><img src="images/954fd5dca140979d5f8074b3fdbf1b0f.jpg" alt="Joker sleeve" style="width:100%; aspect-ratio:1; object-fit:cover; border-radius:7px; display:block;"><img src="images/ba53caca9ff4fd6bb40f0faae0f7c907.jpg" alt="Sugar skull" style="width:100%; aspect-ratio:1; object-fit:cover; border-radius:7px; display:block;"></div>
         <span style="font-size:0.72rem; font-weight:600; color:#a83a2a; letter-spacing:0.02em;">View all work &amp; details &rarr;</span>
       </div>
-      <div data-open="praew" style="background:#fffdf7; border-radius:18px; padding:22px; box-shadow:0 10px 26px -16px rgba(30,58,43,0.25); cursor:pointer; transition:transform .2s ease, box-shadow .2s ease;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 20px 38px -18px rgba(30,58,43,0.4)';" onmouseout="this.style.transform='';this.style.boxShadow='0 10px 26px -16px rgba(30,58,43,0.25)';">
+      <div data-open="praew" class="artist-card" style="background:#fffdf7; border-radius:18px; padding:22px; box-shadow:0 10px 26px -16px rgba(30,58,43,0.25); cursor:pointer; transition:transform .2s ease, box-shadow .2s ease;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 20px 38px -18px rgba(30,58,43,0.4)';" onmouseout="this.style.transform='';this.style.boxShadow='0 10px 26px -16px rgba(30,58,43,0.25)';">
         <div style="display:flex; gap:14px; align-items:flex-start; margin-bottom:14px;">
           <img src="images/d2413a647d52c88d6a31493133e4a42a.jpg" alt="Praew" style="width:72px; height:72px; object-fit:cover; border-radius:50%; flex-shrink:0; box-shadow:0 8px 18px -8px rgba(30,58,43,0.3);">
           <div style="min-width:0;">
@@ -471,7 +498,7 @@ body{margin:0}
           <h4 style="font-family:'Fraunces',serif; font-weight:500; font-size:1.05rem; color:#1e3a2b; margin:0 0 4px;">The road here <em style="font-style:italic; color:#a83a2a;">&mdash; a decade across the US</em></h4>
           <p style="font-size:0.74rem; color:#5a6a56; margin:0 0 18px;">Tap a photo to bring it forward.</p>
           <div style="overflow:hidden; margin:0 -8px;">
-            <div style="display:flex; align-items:center; justify-content:center; gap:10px; padding:4px 8px 14px; flex-wrap:nowrap;">
+            <div id="jrny-row" style="display:flex; align-items:center; justify-content:center; gap:10px; padding:4px 8px 14px; flex-wrap:nowrap; touch-action:pan-y;">
             <div class="jrny-card" data-j="0" style="">
               <div style="width:100%; height:100%; border-radius:12px; overflow:hidden; position:relative;">
                 <img class="jrny-img" src="images/6215a67935c9285024ac169824ac9e28.jpg" alt="Generation8 Tattoo" style="display:block; width:100%; height:100%; object-fit:cover; filter:none; transition:filter .4s ease;">
@@ -727,26 +754,38 @@ body{margin:0}
       <p style="text-align:center; font-size:0.72rem; letter-spacing:0.3em; text-transform:uppercase; color:#6b8f72; margin:0 0 14px; font-weight:600;">Good to know</p>
       <h2 style="text-align:center; font-family:'Fraunces',serif; font-weight:300; font-size:clamp(1.8rem,3.6vw,2.8rem); color:#1e3a2b; margin:0 0 50px;">Questions, <em style="font-style:italic; color:#a83a2a;">answered.</em></h2>
 
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+      <div class="faq-list">
 
-        <div style="background:#fffdf7; border-radius:16px; padding:28px 26px; box-shadow:0 10px 26px -16px rgba(30,58,43,0.25);">
-          <h4 style="font-family:'Fraunces',serif; font-weight:500; font-size:1.05rem; color:#1e3a2b; margin:0 0 10px;">How do I book a session &amp; secure my slot?</h4>
-          <p style="font-size:0.8rem; color:#4a5a47; line-height:1.75; margin:0;">Book online at <a href="https://book.sakstudio.art" target="_blank" rel="noopener" style="color:#a83a2a; font-weight:600;">book.sakstudio.art</a> &mdash; choose your size, style, date and time, and tell us your idea. To hold your slot, we ask for a small 1,500 baht deposit, which goes toward your final tattoo price. We&rsquo;ll confirm by email within 12 hours. Prefer to talk it through first? Message us on Instagram @sakstudio.bkk.</p>
+        <div class="faq-item open">
+          <button class="faq-q" type="button">
+            <span class="faq-qt">How do I book a session &amp; secure my slot?</span>
+            <svg class="faq-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a83a2a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Book online at <a href="https://book.sakstudio.art" target="_blank" rel="noopener" style="color:#a83a2a; font-weight:600;">book.sakstudio.art</a> — pick your size, style, date and time, and tell us your idea. A small <strong>1,500 ฿ deposit</strong> holds your slot and counts toward your final price. We confirm by email within 12 hours. Prefer to chat first? Message us on Instagram <a href="https://instagram.com/sakstudio.bkk" target="_blank" rel="noopener" style="color:#a83a2a; font-weight:600;">@sakstudio.bkk</a>.</div></div>
         </div>
 
-        <div style="background:#fffdf7; border-radius:16px; padding:28px 26px; box-shadow:0 10px 26px -16px rgba(30,58,43,0.25);">
-          <h4 style="font-family:'Fraunces',serif; font-weight:500; font-size:1.05rem; color:#1e3a2b; margin:0 0 10px;">How much will my tattoo cost?</h4>
-          <p style="font-size:0.8rem; color:#4a5a47; line-height:1.75; margin:0;">Minimum 1,500 ฿. Final price depends on design, size, and placement — we'll always give you a range, and the highest charge won't exceed it.</p>
+        <div class="faq-item">
+          <button class="faq-q" type="button">
+            <span class="faq-qt">How much will my tattoo cost?</span>
+            <svg class="faq-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a83a2a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">From 1,500 ฿. Final price depends on design, size and placement — we always give you a range up front, and the highest charge won't exceed it.</div></div>
         </div>
 
-        <div style="background:#fffdf7; border-radius:16px; padding:28px 26px; box-shadow:0 10px 26px -16px rgba(30,58,43,0.25);">
-          <h4 style="font-family:'Fraunces',serif; font-weight:500; font-size:1.05rem; color:#1e3a2b; margin:0 0 10px;">How should I prepare?</h4>
-          <p style="font-size:0.8rem; color:#4a5a47; line-height:1.75; margin:0;">Eat well 3+ hours before, sleep well, avoid sun exposure and alcohol, limit caffeine to one cup, and shower beforehand. Moisturize your skin in the days leading up.</p>
+        <div class="faq-item">
+          <button class="faq-q" type="button">
+            <span class="faq-qt">How should I prepare?</span>
+            <svg class="faq-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a83a2a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Eat a proper meal 3+ hours before, sleep well, and shower beforehand. Skip alcohol and sun exposure, keep caffeine to one cup, and moisturise your skin in the days leading up.</div></div>
         </div>
 
-        <div style="background:#fffdf7; border-radius:16px; padding:28px 26px; box-shadow:0 10px 26px -16px rgba(30,58,43,0.25);">
-          <h4 style="font-family:'Fraunces',serif; font-weight:500; font-size:1.05rem; color:#1e3a2b; margin:0 0 10px;">When can't I get tattooed?</h4>
-          <p style="font-size:0.8rem; color:#4a5a47; line-height:1.75; margin:0;">If you're pregnant, on antibiotics or steroids, vaccinated within 48 hours, under 18, intoxicated, or without government ID. We'll always ask.</p>
+        <div class="faq-item">
+          <button class="faq-q" type="button">
+            <span class="faq-qt">When can't I get tattooed?</span>
+            <svg class="faq-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a83a2a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">If you're pregnant, on antibiotics or steroids, vaccinated within 48 hours, under 18, intoxicated, or without government ID. We'll always ask first.</div></div>
         </div>
 
       </div>
@@ -773,7 +812,7 @@ body{margin:0}
       </div>
     </div>
 
-    <p style="font-size:0.7rem; color:#5f7a5b; letter-spacing:0.06em; margin:0;">© 2026 Sak Studio (Sak Sin Co., Ltd.) — design direction mockup, not the live site</p>
+    <p style="font-size:0.7rem; color:#5f7a5b; letter-spacing:0.06em; margin:0;">© 2026 Sak Studio (Sak Sin Co., Ltd.)</p>
   </div>
 
   <div class="fab-open" style="display:none;">
@@ -840,26 +879,48 @@ body{margin:0}
 </div>
 <script>
 (function(){
+  // ===== shared swipe helper (fires onLeft = next, onRight = prev) =====
+  function attachSwipe(el,onLeft,onRight){
+    if(!el) return;
+    var x0=null,y0=null;
+    el.addEventListener('touchstart',function(e){ var t=e.touches[0]; x0=t.clientX; y0=t.clientY; },{passive:true});
+    el.addEventListener('touchend',function(e){
+      if(x0===null) return;
+      var t=e.changedTouches[0], dx=t.clientX-x0, dy=t.clientY-y0;
+      if(Math.abs(dx)>36 && Math.abs(dx)>Math.abs(dy)){ (dx<0?onLeft:onRight)(); }
+      x0=null; y0=null;
+    },{passive:true});
+  }
+
   // ===== HERO CAROUSEL =====
   var heroCards = Array.prototype.slice.call(document.querySelectorAll('.hero-card'));
   var hActive = 0;
-  var hT = {0:{w:250,h:450,r:22,pad:12,op:1,sh:'0 26px 50px -16px rgba(30,58,43,0.35)',bd:'1px solid rgba(30,58,43,0.1)'},
+  var hT_d = {0:{w:250,h:450,r:22,pad:12,op:1,sh:'0 26px 50px -16px rgba(30,58,43,0.35)',bd:'1px solid rgba(30,58,43,0.1)'},
             1:{w:176,h:360,r:18,pad:9,op:0.9,sh:'0 10px 26px -10px rgba(30,58,43,0.28)',bd:'none'},
             2:{w:124,h:300,r:16,pad:8,op:0.75,sh:'0 6px 20px -10px rgba(30,58,43,0.25)',bd:'none'},
             3:{w:86,h:210,r:14,pad:6,op:0.55,sh:'0 4px 14px -8px rgba(30,58,43,0.2)',bd:'none'},
             4:{w:60,h:150,r:12,pad:4,op:0.4,sh:'0 3px 10px -6px rgba(30,58,43,0.18)',bd:'none'}};
+  var hT_m = {0:{w:178,h:328,r:18,pad:9,op:1,sh:'0 20px 40px -16px rgba(30,58,43,0.35)',bd:'1px solid rgba(30,58,43,0.1)'},
+            1:{w:120,h:252,r:15,pad:7,op:0.9,sh:'0 8px 20px -10px rgba(30,58,43,0.28)',bd:'none'},
+            2:{w:80,h:188,r:13,pad:5,op:0.72,sh:'0 5px 15px -9px rgba(30,58,43,0.25)',bd:'none'},
+            3:{w:54,h:132,r:11,pad:4,op:0.5,sh:'0 3px 10px -7px rgba(30,58,43,0.2)',bd:'none'},
+            4:{w:38,h:96,r:10,pad:3,op:0.34,sh:'none',bd:'none'}};
+  function hT(){ return window.innerWidth<=640 ? hT_m : hT_d; }
   function renderHero(){
-    var n=heroCards.length;
+    var n=heroCards.length, T=hT();
     heroCards.forEach(function(card,i){
       var off=i-hActive; if(off>n/2)off-=n; if(off<-n/2)off+=n;
       if(Math.abs(off)>=5){ card.style.cssText='display:none;'; return; }
-      var t=hT[Math.abs(off)]||hT[4];
+      var t=T[Math.abs(off)]||T[4];
       card.style.cssText='position:relative; border-radius:'+t.r+'px; overflow:hidden; flex-shrink:0; background:#fffdf7; width:'+t.w+'px; height:'+t.h+'px; padding:'+t.pad+'px; opacity:'+t.op+'; box-shadow:'+t.sh+'; border:'+t.bd+'; order:'+off+'; transition:width .4s ease,height .4s ease,opacity .4s ease,padding .4s ease; cursor:pointer;';
       var b=card.querySelector('.hero-badge'); if(b) b.style.display=(off===0?'block':'none');
       var im=card.querySelector('.hero-img'); if(im) im.style.filter=(off===0?'none':'saturate(0.85)');
     });
   }
+  function hStep(d){ var n=heroCards.length; hActive=(hActive+d+n)%n; renderHero(); }
   heroCards.forEach(function(card,i){ card.addEventListener('click',function(){ hActive=i; renderHero(); }); });
+  attachSwipe(document.getElementById('hero-row'), function(){hStep(1);}, function(){hStep(-1);});
+  var hRz; window.addEventListener('resize',function(){ clearTimeout(hRz); hRz=setTimeout(renderHero,150); });
   renderHero();
 
   // ===== JOURNEY CAROUSEL =====
@@ -880,7 +941,9 @@ body{margin:0}
       var im=card.querySelector('.jrny-img'); if(im) im.style.filter=(off===0?'none':'grayscale(0.15)');
     });
   }
+  function jStep(d){ var n=jCards.length; jActive=(jActive+d+n)%n; renderJrny(); }
   jCards.forEach(function(card,i){ card.addEventListener('click',function(){ jActive=i; renderJrny(); }); });
+  attachSwipe(document.getElementById('jrny-row'), function(){jStep(1);}, function(){jStep(-1);});
   renderJrny();
 
   // ===== ARTIST open / close =====
@@ -901,6 +964,15 @@ body{margin:0}
     if(open){ so.style.display='none'; if(sc) sc.style.display=''; }
     else { if(so) so.style.display='block'; if(sc) sc.style.display='none'; }
   }); });
+
+  // ===== FAQ accordion =====
+  document.querySelectorAll('.faq-q').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var item=btn.parentNode, isOpen=item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(function(it){ it.classList.remove('open'); });
+      if(!isOpen) item.classList.add('open');
+    });
+  });
 
   // ===== FAB =====
   var fabOpens=document.querySelectorAll('.fab-open'), fabClosed=document.querySelectorAll('.fab-closed');
